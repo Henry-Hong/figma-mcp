@@ -43,6 +43,16 @@ function extractEdgesFromInteractions(
   return edges;
 }
 
+function collectInteractionsFromSubtree(node: { interactions?: Interaction[]; children?: unknown[] }): Interaction[] {
+  const result: Interaction[] = [...(node.interactions ?? [])];
+  if (Array.isArray(node.children)) {
+    for (const child of node.children) {
+      result.push(...collectInteractionsFromSubtree(child as { interactions?: Interaction[]; children?: unknown[] }));
+    }
+  }
+  return result;
+}
+
 export async function getFlowMap(
   client: FigmaClient,
   fileKey: string,
@@ -58,7 +68,8 @@ export async function getFlowMap(
   const frameIds = frames.map((f) => f.id);
   const frameNameMap = new Map<string, string>(frames.map((f) => [f.id, f.name]));
 
-  // Step 2: batch-fetch all frames with depth=1 to get interactions
+  // Step 2: batch-fetch all frames with depth=0 (full subtree) to capture
+  // interactions inside instance children (e.g. I48:29098;21514:34353 nodes)
   const batches =
     frameIds.length <= BATCH_THRESHOLD ? [frameIds] : chunkArray(frameIds, BATCH_SIZE);
 
@@ -66,13 +77,14 @@ export async function getFlowMap(
   const frameIdSet = new Set(frameIds);
 
   for (const batch of batches) {
-    const response = await client.getFileNodes(fileKey, batch, 1);
+    const response = await client.getFileNodes(fileKey, batch, 0);
     for (const [id, entry] of Object.entries(response.nodes)) {
       if (!entry) {
         continue;
       }
       const node = entry.document;
-      const interactions: Interaction[] = node.interactions ?? [];
+      // Recursively collect interactions from the frame and all its descendants
+      const interactions: Interaction[] = collectInteractionsFromSubtree(node);
       const rawEdges = extractEdgesFromInteractions(id, interactions);
       for (const raw of rawEdges) {
         // Only include edges whose destination is within our frame set

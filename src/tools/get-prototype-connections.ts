@@ -24,12 +24,23 @@ function extractNodeAction(action: Action): { destinationId: string; navigation:
   };
 }
 
+function collectInteractionsRecursive(node: { interactions?: Interaction[]; children?: unknown[] }): Interaction[] {
+  const result: Interaction[] = [...(node.interactions ?? [])];
+  if (Array.isArray(node.children)) {
+    for (const child of node.children) {
+      result.push(...collectInteractionsRecursive(child as { interactions?: Interaction[]; children?: unknown[] }));
+    }
+  }
+  return result;
+}
+
 export async function getPrototypeConnections(
   client: FigmaClient,
   fileKey: string,
   nodeId: string,
 ): Promise<GetPrototypeConnectionsResult> {
-  const response = await client.getFileNodes(fileKey, [nodeId], 1);
+  // depth=0 fetches the full subtree so we can traverse instance internals
+  const response = await client.getFileNodes(fileKey, [nodeId], 0);
   const nodeEntry = response.nodes[nodeId];
 
   if (!nodeEntry) {
@@ -37,7 +48,8 @@ export async function getPrototypeConnections(
   }
 
   const node = nodeEntry.document;
-  const interactions: Interaction[] = node.interactions ?? [];
+  // Collect interactions from the node itself AND all descendants
+  const interactions: Interaction[] = collectInteractionsRecursive(node);
 
   if (interactions.length === 0) {
     return { connections: [] };
