@@ -7,19 +7,10 @@ import largeSectionFixture from '../fixtures/large-section-60-frames.json' asser
 describe('getFlowMap', () => {
   describe('normal case', () => {
     it('returns nodes, edges, and entryPoints from section-node fixture', async () => {
-      // getSectionFrames calls getFileNodes with depth=2 first,
-      // then getFlowMap calls getFileNodes again for interactions with the same IDs
-      const children = sectionNodeFixture.nodes['24626:7077'].document.children;
-      const interactionsResponse = {
-        nodes: {
-          '24626:6637': { document: children[0] },
-          '24626:6654': { document: children[1] },
-        },
-      };
-
+      // New logic: getSectionFrames (depth=2) then one full-section fetch (no depth)
       const getFileNodes = vi.fn()
-        .mockResolvedValueOnce(sectionNodeFixture)       // getSectionFrames call
-        .mockResolvedValueOnce(interactionsResponse);    // batch interaction fetch
+        .mockResolvedValueOnce(sectionNodeFixture)  // getSectionFrames call
+        .mockResolvedValueOnce(sectionNodeFixture); // full section fetch for interactions
 
       const client = {
         getFileNodes,
@@ -35,6 +26,9 @@ describe('getFlowMap', () => {
 
       expect(result.edges).toHaveLength(1);
       expect(result.edges[0].from).toBe('24626:6637');
+      expect(result.edges[0].fromName).toBe('학습설정-진입');
+      expect(result.edges[0].sourceFrameId).toBe('24626:6637');
+      expect(result.edges[0].sourceFrameName).toBe('학습설정-진입');
       expect(result.edges[0].to).toBe('24626:6654');
       expect(result.edges[0].trigger).toBe('ON_CLICK');
       expect(result.edges[0].action).toBe('NAVIGATE');
@@ -47,25 +41,12 @@ describe('getFlowMap', () => {
   });
 
   describe('50+ frames chunking', () => {
-    it('splits 60 frames into 25-frame batches (3 getFileNodes calls total)', async () => {
-      // Build a response map for the 60 frames — no interactions, so edges = []
-      const frameNodes = largeSectionFixture.nodes['section:large'].document.children;
-
-      function makeBatchResponse(frames: typeof frameNodes) {
-        const nodes: Record<string, { document: (typeof frameNodes)[number] }> = {};
-        for (const frame of frames) {
-          nodes[frame.id] = { document: frame };
-        }
-        return { nodes };
-      }
-
+    it('fetches section once for frames and once for interactions (2 getFileNodes calls total)', async () => {
       const getFileNodes = vi.fn()
         // Call 1: getSectionFrames fetches the section node
         .mockResolvedValueOnce(largeSectionFixture)
-        // Calls 2 & 3: two 25-frame batches (60 > 50 threshold → chunked into ceil(60/25)=3 but BATCH_SIZE=25 so chunk([60], 25) → [25,25,10])
-        .mockResolvedValueOnce(makeBatchResponse(frameNodes.slice(0, 25)))
-        .mockResolvedValueOnce(makeBatchResponse(frameNodes.slice(25, 50)))
-        .mockResolvedValueOnce(makeBatchResponse(frameNodes.slice(50, 60)));
+        // Call 2: full section fetch for interactions
+        .mockResolvedValueOnce(largeSectionFixture);
 
       const client = {
         getFileNodes,
@@ -75,8 +56,8 @@ describe('getFlowMap', () => {
 
       const result = await getFlowMap(client, 'fileKey', 'section:large');
 
-      // 1 (section fetch) + 3 (batched frame fetches) = 4 total calls
-      expect(getFileNodes).toHaveBeenCalledTimes(4);
+      // 1 (getSectionFrames) + 1 (full section fetch) = 2 total calls
+      expect(getFileNodes).toHaveBeenCalledTimes(2);
 
       expect(result.nodes).toHaveLength(60);
       expect(result.edges).toHaveLength(0);

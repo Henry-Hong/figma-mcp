@@ -13,6 +13,9 @@ export interface FlowNode {
 
 export interface FlowEdge {
   from: string;
+  fromName: string;
+  sourceFrameId: string;
+  sourceFrameName: string;
   to: string;
   trigger: string;
   action: string;
@@ -24,30 +27,26 @@ export interface GetFlowMapResult {
   entryPoints: string[];
 }
 
-function extractEdgesFromInteractions(
-  _fromId: string,
-  interactions: Interaction[],
-): Array<{ to: string; trigger: string; action: string }> {
-  const edges: Array<{ to: string; trigger: string; action: string }> = [];
-  for (const interaction of interactions) {
-    for (const act of interaction.actions) {
-      if (act.type === "NODE" && act.destinationId !== null) {
-        edges.push({
-          to: act.destinationId,
-          trigger: interaction.trigger.type,
-          action: (act as Extract<Action, { type: "NODE" }>).navigation,
-        });
-      }
-    }
-  }
-  return edges;
+interface RawInteractionSource {
+  nodeId: string;
+  nodeName: string;
+  interactions: Interaction[];
 }
 
-function collectInteractionsFromSubtree(node: { interactions?: Interaction[]; children?: unknown[] }): Interaction[] {
-  const result: Interaction[] = [...(node.interactions ?? [])];
+function collectInteractionSources(
+  node: { id: string; name: string; interactions?: Interaction[]; children?: unknown[] },
+): RawInteractionSource[] {
+  const result: RawInteractionSource[] = [];
+  if (node.interactions && node.interactions.length > 0) {
+    result.push({ nodeId: node.id, nodeName: node.name, interactions: node.interactions });
+  }
   if (Array.isArray(node.children)) {
     for (const child of node.children) {
-      result.push(...collectInteractionsFromSubtree(child as { interactions?: Interaction[]; children?: unknown[] }));
+      result.push(
+        ...collectInteractionSources(
+          child as { id: string; name: string; interactions?: Interaction[]; children?: unknown[] },
+        ),
+      );
     }
   }
   return result;
@@ -67,45 +66,59 @@ export async function getFlowMap(
 
   const frameIds = frames.map((f) => f.id);
   const frameNameMap = new Map<string, string>(frames.map((f) => [f.id, f.name]));
-
-  // Step 2: batch-fetch all frames with depth=0 (full subtree) to capture
-  // interactions inside instance children (e.g. I48:29098;21514:34353 nodes)
-  const batches =
-    frameIds.length <= BATCH_THRESHOLD ? [frameIds] : chunkArray(frameIds, BATCH_SIZE);
-
-  const allEdges: FlowEdge[] = [];
   const frameIdSet = new Set(frameIds);
 
-  for (const batch of batches) {
-    // depth omitted → Figma returns the full subtree, needed to traverse instance internals
+  // Step 2: fetch the section node directly (without depth limit) so Figma returns
+  // correct destinationIds — querying frames individually causes destinations to be null.
+  const allEdges: FlowEdge[] = [];
+
+  const sectionBatches = [[sectionNodeId].length <= BATCH_THRESHOLD
+    ? [sectionNodeId]
+    : chunkArray([sectionNodeId], BATCH_SIZE)[0]];
+
+  for (const batch of sectionBatches) {
     const response = await client.getFileNodes(fileKey, batch);
-    for (const [id, entry] of Object.entries(response.nodes)) {
-      if (!entry) {
-        continue;
-      }
-      const node = entry.document;
-      // Recursively collect interactions from the frame and all its descendants
-      const interactions: Interaction[] = collectInteractionsFromSubtree(node);
-      const rawEdges = extractEdgesFromInteractions(id, interactions);
-      for (const raw of rawEdges) {
-        // Only include edges whose destination is within our frame set
-        if (frameIdSet.has(raw.to)) {
-          allEdges.push({ from: id, to: raw.to, trigger: raw.trigger, action: raw.action });
+    for (const [, entry] of Object.entries(response.nodes)) {
+      if (!entry) continue;
+      const sectionDoc = entry.document;
+
+      for (const frameNode of (sectionDoc.children ?? [])) {
+        const typedFrameNode = frameNode as { id: string; name: string; interactions?: Interaction[]; children?: unknown[] };
+        if (!frameIdSet.has(typedFrameNode.id)) continue;
+
+        const frameId = typedFrameNode.id;
+        const frameName = frameNameMap.get(frameId) ?? typedFrameNode.name;
+
+        // Collect interactions with their actual source node info
+        const sources = collectInteractionSources(typedFrameNode);
+        for (const source of sources) {
+          for (const interaction of source.interactions) {
+            for (const act of interaction.actions) {
+              if (act.type !== "NODE" || act.destinationId === null) continue;
+              const navigation = (act as Extract<Action, { type: "NODE" }>).navigation;
+              if (!frameIdSet.has(act.destinationId)) continue;
+              allEdges.push({
+                from: source.nodeId,
+                fromName: source.nodeName,
+                sourceFrameId: frameId,
+                sourceFrameName: frameName,
+                to: act.destinationId,
+                trigger: interaction.trigger.type,
+                action: navigation,
+              });
+            }
+          }
         }
       }
     }
   }
 
-  // Step 3: build nodes list (only frames that appear in edges or are known frames)
+  // Step 3: build nodes list
   const nodes: FlowNode[] = frames.map((f) => ({ id: f.id, name: f.name }));
 
   // Step 4: compute entry points — frames with no incoming edges
   const hasIncomingEdge = new Set(allEdges.map((e) => e.to));
   const entryPoints = frameIds.filter((id) => !hasIncomingEdge.has(id));
-
-  // Enrich node names for any destination IDs not in frameNameMap (cross-section links filtered out above)
-  // frameNameMap already covers all nodes in our list
-  void frameNameMap;
 
   return { nodes, edges: allEdges, entryPoints };
 }
