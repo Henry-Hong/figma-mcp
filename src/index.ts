@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
@@ -21,9 +22,15 @@ const fileKeySchema = z
   .string()
   .regex(/^[a-zA-Z0-9_-]+$/, "Invalid Figma file key format")
   .describe("Figma file key");
+// Figma node IDs come in two forms:
+//   - Top-level:  "48:29098"          (number:number)
+//   - Instance-internal: "I48:29098;21514:34353"  (I + segments joined by ;)
 const nodeIdSchema = z
   .string()
-  .regex(/^\d+:\d+$/, "Invalid node ID format (expected 'number:number')")
+  .regex(
+    /^I?[\d]+:[\d]+(;[\d]+:[\d]+)*$/,
+    "Invalid node ID format (expected 'number:number' or 'Inumber:number;number:number')",
+  )
   .describe("Node ID");
 
 // get_section_frames
