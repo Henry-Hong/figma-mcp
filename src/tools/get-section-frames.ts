@@ -31,7 +31,12 @@ export async function getSectionFrames(
     throw new Error(`Node ${sectionNodeId} is not a SECTION type. Got: ${sectionNode.type}`);
   }
 
-  const frameChildren = findChildrenByType(sectionNode, "FRAME");
+  // Include both FRAME and INSTANCE nodes — sections can contain component instances
+  // that act as screens in a prototype flow
+  const frameChildren = [
+    ...findChildrenByType(sectionNode, "FRAME"),
+    ...findChildrenByType(sectionNode, "INSTANCE"),
+  ];
 
   const frames: SectionFrame[] = frameChildren.map((frame) => {
     const bounds = frame.absoluteBoundingBox;
