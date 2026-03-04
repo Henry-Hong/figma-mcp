@@ -1,0 +1,11 @@
+{
+  "error": { "status": 403, "message": "Forbidden" },
+  "nodeWithBoundVariables": {
+    "id": "24626:6637",
+    "name": "학습설정-진입",
+    "type": "FRAME",
+    "boundVariables": {
+      "fills": { "type": "VARIABLE_ALIAS", "id": "var:1" }
+    }
+  }
+}

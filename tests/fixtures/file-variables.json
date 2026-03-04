@@ -1,0 +1,33 @@
+{
+  "status": 200,
+  "error": false,
+  "meta": {
+    "variables": {
+      "var:1": {
+        "id": "var:1",
+        "name": "color/primary",
+        "key": "abc",
+        "variableCollectionId": "col:1",
+        "resolvedType": "COLOR",
+        "valuesByMode": { "mode:1": { "r": 0.2, "g": 0.4, "b": 0.8, "a": 1 } },
+        "remote": false,
+        "description": "",
+        "hiddenFromPublishing": false,
+        "scopes": ["ALL_FILLS"],
+        "codeSyntax": {}
+      }
+    },
+    "variableCollections": {
+      "col:1": {
+        "id": "col:1",
+        "name": "Colors",
+        "key": "xyz",
+        "modes": [{ "modeId": "mode:1", "name": "Default" }],
+        "defaultModeId": "mode:1",
+        "remote": false,
+        "hiddenFromPublishing": false,
+        "variableIds": ["var:1"]
+      }
+    }
+  }
+}

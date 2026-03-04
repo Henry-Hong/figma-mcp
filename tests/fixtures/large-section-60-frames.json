@@ -1,0 +1,733 @@
+{
+  "nodes": {
+    "section:large": {
+      "document": {
+        "id": "section:large",
+        "name": "Large Section",
+        "type": "SECTION",
+        "children": [
+          {
+            "id": "frame:1",
+            "name": "Frame 1",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 0,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:2",
+            "name": "Frame 2",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 400,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:3",
+            "name": "Frame 3",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 800,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:4",
+            "name": "Frame 4",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 1200,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:5",
+            "name": "Frame 5",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 1600,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:6",
+            "name": "Frame 6",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 2000,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:7",
+            "name": "Frame 7",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 2400,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:8",
+            "name": "Frame 8",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 2800,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:9",
+            "name": "Frame 9",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 3200,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:10",
+            "name": "Frame 10",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 3600,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:11",
+            "name": "Frame 11",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 4000,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:12",
+            "name": "Frame 12",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 4400,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:13",
+            "name": "Frame 13",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 4800,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:14",
+            "name": "Frame 14",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 5200,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:15",
+            "name": "Frame 15",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 5600,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:16",
+            "name": "Frame 16",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 6000,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:17",
+            "name": "Frame 17",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 6400,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:18",
+            "name": "Frame 18",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 6800,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:19",
+            "name": "Frame 19",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 7200,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:20",
+            "name": "Frame 20",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 7600,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:21",
+            "name": "Frame 21",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 8000,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:22",
+            "name": "Frame 22",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 8400,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:23",
+            "name": "Frame 23",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 8800,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:24",
+            "name": "Frame 24",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 9200,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:25",
+            "name": "Frame 25",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 9600,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:26",
+            "name": "Frame 26",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 10000,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:27",
+            "name": "Frame 27",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 10400,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:28",
+            "name": "Frame 28",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 10800,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:29",
+            "name": "Frame 29",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 11200,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:30",
+            "name": "Frame 30",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 11600,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:31",
+            "name": "Frame 31",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 12000,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:32",
+            "name": "Frame 32",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 12400,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:33",
+            "name": "Frame 33",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 12800,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:34",
+            "name": "Frame 34",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 13200,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:35",
+            "name": "Frame 35",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 13600,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:36",
+            "name": "Frame 36",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 14000,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:37",
+            "name": "Frame 37",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 14400,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:38",
+            "name": "Frame 38",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 14800,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:39",
+            "name": "Frame 39",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 15200,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:40",
+            "name": "Frame 40",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 15600,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:41",
+            "name": "Frame 41",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 16000,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:42",
+            "name": "Frame 42",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 16400,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:43",
+            "name": "Frame 43",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 16800,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:44",
+            "name": "Frame 44",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 17200,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:45",
+            "name": "Frame 45",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 17600,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:46",
+            "name": "Frame 46",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 18000,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:47",
+            "name": "Frame 47",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 18400,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:48",
+            "name": "Frame 48",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 18800,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:49",
+            "name": "Frame 49",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 19200,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:50",
+            "name": "Frame 50",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 19600,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:51",
+            "name": "Frame 51",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 20000,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:52",
+            "name": "Frame 52",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 20400,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:53",
+            "name": "Frame 53",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 20800,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:54",
+            "name": "Frame 54",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 21200,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:55",
+            "name": "Frame 55",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 21600,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:56",
+            "name": "Frame 56",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 22000,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:57",
+            "name": "Frame 57",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 22400,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:58",
+            "name": "Frame 58",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 22800,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:59",
+            "name": "Frame 59",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 23200,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          },
+          {
+            "id": "frame:60",
+            "name": "Frame 60",
+            "type": "FRAME",
+            "absoluteBoundingBox": {
+              "x": 23600,
+              "y": 0,
+              "width": 360,
+              "height": 720
+            },
+            "interactions": []
+          }
+        ]
+      }
+    }
+  }
+}

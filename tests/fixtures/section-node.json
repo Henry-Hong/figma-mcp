@@ -1,0 +1,32 @@
+{
+  "nodes": {
+    "24626:7077": {
+      "document": {
+        "id": "24626:7077",
+        "name": "학습 설정 - TOEFL",
+        "type": "SECTION",
+        "children": [
+          {
+            "id": "24626:6637",
+            "name": "학습설정-진입",
+            "type": "FRAME",
+            "absoluteBoundingBox": { "x": 80, "y": 1527, "width": 360, "height": 720 },
+            "interactions": [
+              {
+                "trigger": { "type": "ON_CLICK" },
+                "actions": [{ "type": "NODE", "destinationId": "24626:6654", "navigation": "NAVIGATE" }]
+              }
+            ]
+          },
+          {
+            "id": "24626:6654",
+            "name": "학습설정-완료",
+            "type": "FRAME",
+            "absoluteBoundingBox": { "x": 480, "y": 1527, "width": 360, "height": 720 },
+            "interactions": []
+          }
+        ]
+      }
+    }
+  }
+}
