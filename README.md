@@ -1,5 +1,7 @@
 # @devheerim/figma-mcp
 
+**English** | [한국어](./README.ko.md)
+
 Enhanced Figma MCP Server that exposes prototype flow data — screen lists, prototype connections, and full flow maps — via the Figma REST API.
 
 Designed as a complete replacement for the official `https://mcp.figma.com/mcp`, adding the missing prototype interaction layer so Claude Code can understand entire user flows from a single Figma URL.
