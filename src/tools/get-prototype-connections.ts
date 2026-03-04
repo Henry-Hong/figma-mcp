@@ -39,8 +39,8 @@ export async function getPrototypeConnections(
   fileKey: string,
   nodeId: string,
 ): Promise<GetPrototypeConnectionsResult> {
-  // depth=0 fetches the full subtree so we can traverse instance internals
-  const response = await client.getFileNodes(fileKey, [nodeId], 0);
+  // depth omitted → Figma returns the full subtree, needed to traverse instance internals
+  const response = await client.getFileNodes(fileKey, [nodeId]);
   const nodeEntry = response.nodes[nodeId];
 
   if (!nodeEntry) {

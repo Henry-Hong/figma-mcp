@@ -77,7 +77,8 @@ export async function getFlowMap(
   const frameIdSet = new Set(frameIds);
 
   for (const batch of batches) {
-    const response = await client.getFileNodes(fileKey, batch, 0);
+    // depth omitted → Figma returns the full subtree, needed to traverse instance internals
+    const response = await client.getFileNodes(fileKey, batch);
     for (const [id, entry] of Object.entries(response.nodes)) {
       if (!entry) {
         continue;
