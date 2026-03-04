@@ -1,6 +1,6 @@
 {
   "name": "@devheerim/figma-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Enhanced Figma MCP Server with prototype flow analysis — exposes screen lists, prototype connections, and full flow maps via Figma REST API",
   "type": "module",
   "main": "dist/index.js",
