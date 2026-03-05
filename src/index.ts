@@ -36,13 +36,14 @@ const nodeIdSchema = z
 // get_section_frames
 server.tool(
   "get_section_frames",
-  "Get all frames within a section node",
+  "Get a hierarchical tree of sections and frames within a section node. Nested sections are returned as children, making it easy to understand the structure for scoping work (e.g. splitting PRs by section).",
   {
     fileKey: fileKeySchema,
     sectionNodeId: nodeIdSchema.describe("Section node ID"),
+    depth: z.number().int().min(1).max(20).optional().describe("Max nesting depth to traverse (default: 10)"),
   },
-  async ({ fileKey, sectionNodeId }) => {
-    const result = await getSectionFrames(figmaClient, fileKey, sectionNodeId);
+  async ({ fileKey, sectionNodeId, depth }) => {
+    const result = await getSectionFrames(figmaClient, fileKey, sectionNodeId, depth);
     return {
       content: [{ type: "text" as const, text: JSON.stringify(result) }],
     };

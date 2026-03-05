@@ -1,7 +1,7 @@
 import type { FigmaClient } from "../figma-client.js";
 import type { Action, Interaction } from "../types.js";
 import { chunkArray } from "../utils/node-traversal.js";
-import { getSectionFrames } from "./get-section-frames.js";
+import { getSectionFrames, flattenTree } from "./get-section-frames.js";
 
 const BATCH_THRESHOLD = 50;
 const BATCH_SIZE = 25;
@@ -57,15 +57,16 @@ export async function getFlowMap(
   fileKey: string,
   sectionNodeId: string,
 ): Promise<GetFlowMapResult> {
-  // Step 1: collect frame IDs from the section
-  const { frames } = await getSectionFrames(client, fileKey, sectionNodeId);
+  // Step 1: collect frame IDs from the section (flatten the tree)
+  const { tree } = await getSectionFrames(client, fileKey, sectionNodeId);
+  const frames = flattenTree(tree);
 
   if (frames.length === 0) {
     return { nodes: [], edges: [], entryPoints: [] };
   }
 
-  const frameIds = frames.map((f) => f.id);
-  const frameNameMap = new Map<string, string>(frames.map((f) => [f.id, f.name]));
+  const frameIds = frames.map((f: { id: string }) => f.id);
+  const frameNameMap = new Map<string, string>(frames.map((f: { id: string; name: string }) => [f.id, f.name]));
   const frameIdSet = new Set(frameIds);
 
   // Step 2: fetch the section node directly (without depth limit) so Figma returns
@@ -114,11 +115,11 @@ export async function getFlowMap(
   }
 
   // Step 3: build nodes list
-  const nodes: FlowNode[] = frames.map((f) => ({ id: f.id, name: f.name }));
+  const nodes: FlowNode[] = frames.map((f: { id: string; name: string }) => ({ id: f.id, name: f.name }));
 
   // Step 4: compute entry points — frames with no incoming edges
   const hasIncomingEdge = new Set(allEdges.map((e) => e.to));
-  const entryPoints = frameIds.filter((id) => !hasIncomingEdge.has(id));
+  const entryPoints = frameIds.filter((id: string) => !hasIncomingEdge.has(id));
 
   return { nodes, edges: allEdges, entryPoints };
 }
